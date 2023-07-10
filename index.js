@@ -6,8 +6,10 @@ var minesLocation=[];
 
 var tilesClicked=0;
 var flagged=false;
-
 var gameOver=false;
+
+var startTime;
+var timerInterval;
 
 window.onload=function(){
     startGame();
@@ -19,6 +21,12 @@ function startGame(){
 
     setMines();
 
+    setBoard();
+
+    startTimer();
+}
+
+function setBoard(){
     for(let r=0;r<rows;r++){
         let row=[]
         for(let c=0;c<columns;c++){
@@ -31,6 +39,25 @@ function startGame(){
         board.push(row);
     }
 }
+
+function resetBoard(){
+    document.getElementById("board").innerHTML = "";
+    board = [];
+    minesLocation = [];
+    tilesClicked = 0;
+    flagged = false;
+    gameOver = false;
+}
+
+document.getElementById("start").addEventListener("click",function(){
+    rows=parseInt(document.getElementById("rowInp").value);
+    columns=parseInt(document.getElementById("columnInp").value);
+    mineCount=parseInt(document.getElementById("mineIn").value);
+    document.getElementById("board").style.gridTemplateColumns=`repeat(${columns},1fr)`;
+    document.getElementById("board").style.gridTemplateRows=`repeat(${rows},1fr)`;
+    resetBoard();
+    startGame();
+})
 
 function setFlag(){
     if (flagged){
@@ -136,6 +163,7 @@ function checkMine(r,c){
     if(tilesClicked==rows*columns-mineCount){
         document.getElementById("count").innerText="cleared";
         gameOver=true;
+        stopTimer();
     }
 }
 
@@ -148,4 +176,18 @@ function checkTile(r,c){
         return 1;
     }
     return 0;
+}
+
+
+function startTimer() {
+    startTime = Date.now();
+    timerInterval = setInterval(function() {
+        var elapsedTime = Date.now() - startTime;
+        var seconds = Math.floor(elapsedTime / 1000);
+        document.getElementById("time").innerText = seconds;
+    }, 1000);
+}
+
+function stopTimer(){
+    clearInterval(timerInterval);
 }

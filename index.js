@@ -22,8 +22,6 @@ function startGame(){
     setMines();
 
     setBoard();
-
-    startTimer();
 }
 
 function setBoard(){
@@ -56,6 +54,7 @@ document.getElementById("start").addEventListener("click",function(){
     document.getElementById("board").style.gridTemplateColumns=`repeat(${columns},1fr)`;
     document.getElementById("board").style.gridTemplateRows=`repeat(${rows},1fr)`;
     resetBoard();
+    startTimer();
     startGame();
 })
 
@@ -184,7 +183,18 @@ function startTimer() {
     timerInterval = setInterval(function() {
         var elapsedTime = Date.now() - startTime;
         var seconds = Math.floor(elapsedTime / 1000);
-        document.getElementById("time").innerText = seconds;
+        var minutes = Math.floor(seconds / 60);
+        seconds = seconds % 60;
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+        document.getElementById("time").innerText = minutes + ":" + seconds;
+        if (minutes == 30) {
+            stopTimer();
+        }
     }, 1000);
 }
 

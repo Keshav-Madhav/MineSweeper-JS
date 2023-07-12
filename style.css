@@ -5,15 +5,16 @@ body{
 }
 
 #board{
-    width: 75vmin;
-    height: 75vmin;
+    --tile-size: 20px;
+    width: calc(var(--tile-size) * var(--columns));
+    height: calc(var(--tile-size) * var(--rows));
     background-color: rgb(204, 204, 204);
     border: calc(60vmin/50) solid darkgray;
 
     margin: auto;
     display: grid;
-    grid-template-columns: repeat(30,1fr);
-    grid-template-rows: repeat(30,1fr);
+    grid-template-columns: repeat(var(--columns), 1fr);
+    grid-template-rows: repeat(var(--rows), 1fr);
 }
 
 #board div{
@@ -35,6 +36,10 @@ body{
     justify-content: center;
     margin: auto;
     width: fit-content;
+}
+
+#flag-count{
+    margin: 2px 0;
 }
 
 .inps{

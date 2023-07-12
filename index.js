@@ -5,6 +5,7 @@ var mineCount=100;
 var minesLocation=[];
 
 var tilesClicked=0;
+var flagCount = 0;
 var flagged=false;
 var gameOver=false;
 
@@ -18,6 +19,10 @@ window.onload=function(){
 function startGame(){
     document.getElementById("count").innerText=mineCount;
     document.getElementById("flag").addEventListener("click",setFlag);
+
+    let boardElement = document.getElementById("board");
+    boardElement.style.setProperty("--columns", columns);
+    boardElement.style.setProperty("--rows", rows);
 
     setMines();
 
@@ -47,16 +52,20 @@ function resetBoard(){
     gameOver = false;
 }
 
-document.getElementById("start").addEventListener("click",function(){
-    rows=parseInt(document.getElementById("rowInp").value);
-    columns=parseInt(document.getElementById("columnInp").value);
-    mineCount=parseInt(document.getElementById("mineIn").value);
-    document.getElementById("board").style.gridTemplateColumns=`repeat(${columns},1fr)`;
-    document.getElementById("board").style.gridTemplateRows=`repeat(${rows},1fr)`;
+document.getElementById("start").addEventListener("click", function () {
+    rows = parseInt(document.getElementById("rowInp").value);
+    columns = parseInt(document.getElementById("columnInp").value);
+    mineCount = parseInt(document.getElementById("mineIn").value);
+
+    let boardElement = document.getElementById("board");
+    boardElement.style.setProperty("--columns", columns);
+    boardElement.style.setProperty("--rows", rows);
+
     resetBoard();
     startTimer();
     startGame();
 })
+
 
 function setFlag(){
     if (flagged){
@@ -74,12 +83,15 @@ function clickTile(){
         return; 
     }
     let tile=this;
-    if(flagged){
-        if(tile.innerText==''){
-            tile.innerText="🚩";
-        }
-        else if(tile.innerText=="🚩"){
-            tile.innerText="";
+    if (flagged) {
+        if (tile.innerText == '') {
+            tile.innerText = "🚩";
+            flagCount++;
+            updateFlagCount();
+        } else if (tile.innerText == "🚩") {
+            tile.innerText = "";
+            flagCount--;
+            updateFlagCount();
         }
         return;
     }
@@ -201,4 +213,8 @@ function startTimer() {
 
 function stopTimer(){
     clearInterval(timerInterval);
+}
+
+function updateFlagCount() {
+    document.getElementById("flag-count").innerText = "Flags: " + flagCount;
 }

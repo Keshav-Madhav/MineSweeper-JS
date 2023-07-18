@@ -49,7 +49,9 @@ function resetBoard(){
     minesLocation = [];
     tilesClicked = 0;
     flagged = false;
+    flagCount=0;
     gameOver = false;
+    updateFlagCount();
 }
 
 document.getElementById("start").addEventListener("click", function () {

@@ -17,6 +17,14 @@ window.onload=function(){
 }
 
 function startGame(){
+    // Ensure that the number of mines is not greater than the number of tiles on the board
+    if (mineCount > (rows * columns)-(rows+columns)) {
+        document.getElementById("flag-count").innerHTML = "Error: Excessive number of Mines.";
+        return;
+    } else {
+        document.getElementById("flag-count").innerText = "";
+    }
+    
     document.getElementById("count").innerText=mineCount;
     document.getElementById("flag").addEventListener("click",setFlag);
 
@@ -28,6 +36,7 @@ function startGame(){
 
     setBoard();
 }
+
 
 function setBoard(){
     for(let r=0;r<rows;r++){

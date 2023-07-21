@@ -107,6 +107,10 @@ function clickTile(){
         return;
     }
 
+    if(gameOver || this.classList.contains("tile-clicked") || this.innerText == "🚩"){
+        return; 
+    }
+
     if(minesLocation.includes(tile.id)){
         gameOver=true;
         stopTimer();

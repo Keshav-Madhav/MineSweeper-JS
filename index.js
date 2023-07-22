@@ -12,6 +12,19 @@ var gameOver=false;
 var startTime;
 var timerInterval;
 
+let darkMode = false;
+
+document.getElementById("mode-switch").addEventListener("click", function() {
+  if (darkMode) {
+      document.documentElement.classList.remove("dark-mode");
+      darkMode = false;
+  } else {
+      document.documentElement.classList.add("dark-mode");
+      darkMode = true;
+  }
+});
+
+
 window.onload=function(){
     startGame();
 }

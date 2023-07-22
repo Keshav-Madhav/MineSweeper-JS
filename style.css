@@ -1,16 +1,36 @@
+:root {
+    --background-color: white;
+    --text-color: black;
+    --board-background-color: rgb(204, 204, 204);
+    --board-border-color: darkgray;
+    --tile-border-color: whitesmoke;
+    --tile-clicked-background-color: rgb(229, 229, 229);
+}
+
+.dark-mode {
+    --background-color: #333;
+    --text-color: white;
+    --board-background-color: #555;
+    --board-border-color: #777;
+    --tile-border-color: #777;
+    --tile-clicked-background-color: #444;
+}
+
 body{
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     text-align: center;
     user-select: none;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
 #board{
     --tile-size: 20px;
     width: calc(var(--tile-size) * var(--columns));
     height: calc(var(--tile-size) * var(--rows));
-    background-color: rgb(204, 204, 204);
-    border: calc(60vmin/50) solid darkgray;
+    background-color: var(--board-background-color);
+    border: calc(60vmin/50) solid var(--board-border-color);
 
     margin: auto;
     display: grid;
@@ -19,7 +39,7 @@ body{
 }
 
 #board div{
-    border: 1px solid whitesmoke;
+    border: 1px solid var(--tile-border-color);
     font-size: 1.7vmin;
     display: flex;
     align-items: center;
@@ -27,80 +47,77 @@ body{
 }
 
 .tile-clicked{
-    background-color: rgb(229, 229, 229);
+    background-color: var(--tile-clicked-background-color);
 }
 
 .container{
     display: flex;
     flex-wrap: wrap-reverse;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-    width: fit-content;
+    align-items:center;
+    justify-content:center;
+    margin:auto;
+    width:fit-content;
 }
 
 #flag-count{
-    margin: 2px 0;
+    margin:2px 0;
 }
 
 .inps{
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
-    height: 75vmin;
+    display:flex;
+    flex-direction:column;
+    width:fit-content;
 }
 
 .row{
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    text-align: start;
-    height: 50px;
-    width: auto;
+    display:grid;
+    grid-template-columns:1fr 3fr;
+    text-align:start;
 }
 
 .inps input{
-    height: 20px;
-    margin: 15px;
-    text-align: end;
+    height:auto; 
+    margin:auto; 
+    text-align:end; 
 }
 
 #start{
-    width: 90px;
-    height: 40px;
-    font-size: large;
-    margin: 15px auto;
+    width:auto; 
+    height:auto; 
+    font-size:auto; 
+    margin:auto; 
 }
 
 .x1{
-    color: blue;
+    color:#0000ff; 
 }
 
 .x2{
-    color: green;
+    color:#008000; 
 }
 
 .x3{
-    color: red;
+    color:#ff0000; 
 }
 
 .x4{
-    color: navy;
+    color:#000080; 
 }
 
 .x5{
-    color: brown;
+    color:#a52a2a; 
 }
 
 .x6{
-    color: teal;
+    color:#008080; 
 }
 
 .x7{
-    color: black;
+    color:#000000; 
 }
 
 .x8{
-    color: gray;
+    color:#808080; 
 }
 
 #flag{
